@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Playlist</title>
+</head>
+
+
+<style>
+
+    #flexbox {
+        display: flex;
+        flex-direction: row;
+    }
+    #Songslist {
+        background-color: grey;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border-radius: 25px;
+        padding: 1%;
+        margin: 1%;
+    }
+    #Playlist {
+        background-color: grey;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border-radius: 25px;
+        padding: 1%;
+        margin: 1%;
+    }
+    #AddSongs {
+        background-color: grey;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border-radius: 25px;
+        padding: 1%;
+        margin: 1%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    #AddSongContainer {
+        padding: 1%;
+        margin: 1%;
+        background-color: grey;
+        border-radius: 15px;
+    }
+    .song { 
+        background-color: darkgrey;
+        padding: 1%;
+        border: solid;
+        border-radius: 15px;
+        margin: 1%;
+        text-align: center;
+    }
+    .image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        border-radius: 15px;
+    }
+
+
+</style>
+
+<body>
+    <div id="flexbox">
+
+        <div id="Songslist">
+            <h1>All Songs</h1>
+
+            <% for (let currItem of Musiclists) { %>
+                <div class="song">
+                    <div class="image">
+                        <img src = <%= currItem.img %>/>
+                    </div>
+                    <div>
+                        <h2>Song Name: <%= currItem.Title %></h2>
+                        <p>Artist: <%= currItem.Artist %></p>
+                        <form method="POST" action="/AddSongToPlaylist/<%= currItem._id %>"> 
+                        <button>Add to Playlist</button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+
+        </div>
+
+        <div id="Playlist">
+            <h1>My Playlist</h1>
+
+            <% if (Playlists.length === 0) { %>
+                <p> No songs currently in Playlists </p>
+            <% } else { %>
+                <% for (let currItem of Playlists ) { %>
+                    <div class="song">
+                        <div class="image">
+                            <img src = <%= currItem.img %>/>
+                        </div>
+                        <div>
+                            <h2>Song Name: <%= currItem.Title %></h2>
+                            <p>Artist: <%= currItem.Artist %></p>
+                            <form method="POST" action="/RemoveSongFromPlaylist/<%= currItem._id %>"> 
+                            <button>Remove from Playlist</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+           <% } %>
+
+        </div>
+
+        <div id="AddSongs">
+            <h1>Add New Songs</h1>
+            <div id="AddSongContainer">
+            <form method="POST" action="/add">
+                <input type="text" name="newsongname" placeholder="Enter name of new song"/>
+                <br>
+                <input type="text" name="newsongartist" placeholder="Enter artist of new song"/>
+                <br>
+                <input type="text" name="newsongimg" placeholder="Enter url of image"/>
+                <br>
+                <button>Add Song</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

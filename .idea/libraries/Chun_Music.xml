@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Chun_Music">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Chun_Music.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
